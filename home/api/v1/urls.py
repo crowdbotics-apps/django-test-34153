@@ -10,8 +10,6 @@ from dashboard.viewsets import (
     AppViewSet,
 )
 
-
-
 router = DefaultRouter()
 router.register("signup", SignupViewSet, basename="signup")
 router.register("login", LoginViewSet, basename="login")

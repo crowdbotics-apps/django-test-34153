@@ -15,8 +15,8 @@ class AppViewSet(viewsets.ModelViewSet):
     queryset = App.objects.all()
     serializer_class = AppSerializer
 
+    """
     def apps_list(self, request, *args, **kwargs):
         app_list = self.get_object()
-        logger.info('TEST!!!!!!!')
 
-        return Response({"TEST"})
+        return Response(app_list)"""

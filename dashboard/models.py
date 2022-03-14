@@ -23,8 +23,8 @@ class App(models.Model):
     screenshot = models.URLField('Screenshot', max_length=200, blank=True)
     # subscription = models.ForeignKey(Subscription, null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL)
-    created_at = models.DateTimeField('Created at', blank=True)
-    updated_at = models.DateTimeField('Updated at', blank=True)
+    created_at = models.DateTimeField('Created at', null=True)
+    updated_at = models.DateTimeField('Updated at', null=True)
 
 
 class Plan(models.Model):
