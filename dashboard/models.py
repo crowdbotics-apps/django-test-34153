@@ -31,8 +31,8 @@ class Plan(models.Model):
     name = models.CharField('Name', max_length=20)
     description = models.TextField('Description', blank=False)
     price = models.DecimalField('Price', decimal_places=2, max_digits=5)
-    created_at = models.DateTimeField('Created at', blank=True)
-    updated_at = models.DateTimeField('Updated at', blank=True)
+    created_at = models.DateTimeField('Created at', null=True)
+    updated_at = models.DateTimeField('Updated at', null=True)
 
 
 class Subscription(models.Model):
@@ -40,5 +40,5 @@ class Subscription(models.Model):
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
     app = models.ForeignKey(App, on_delete=models.CASCADE)
     active = models.BooleanField('Active')
-    created_at = models.DateTimeField('Created at', blank=True)
-    updated_at = models.DateTimeField('Updated at', blank=True)
+    created_at = models.DateTimeField('Created at', null=True)
+    updated_at = models.DateTimeField('Updated at', null=True)
