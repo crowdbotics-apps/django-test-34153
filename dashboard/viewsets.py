@@ -1,8 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from .models import App
-from .serializers import AppSerializer, PostAppSerializer
+from .models import App, Plan, Subscription
+from .serializers import (
+    AppSerializer, 
+    PlanSerializer,
+    SubscriptionSerializer
+)
 
 
 # Create your views here.
@@ -12,18 +16,22 @@ class AppViewSet(viewsets.ModelViewSet):
     """
     queryset = App.objects.all()
     serializer_class = AppSerializer
+    
 
 
-    def get_serializer_class(self):
+class PlanViewSet(viewsets.ModelViewSet):
+    """
+    PlanViewSet
+    """
+    queryset = Plan.objects.all()
+    serializer_class = PlanSerializer
+    http_method_names = ['get']
 
-        if self.request.method == 'GET':
-            return AppSerializer
 
-        elif self.request.method == 'POST':
-            return PostAppSerializer
-
-        elif self.request.method == 'PUT':
-            return PostAppSerializer
-
-        elif self.request.method == 'PATCH':
-            return PostAppSerializer
+class SubscriptionViewSet(viewsets.ModelViewSet):
+    """
+    SubscriptionViewSet
+    """
+    queryset = Subscription.objects.filter(active=True).all()
+    serializer_class = SubscriptionSerializer
+    http_method_names = ['get', 'post', 'put', 'patch']

@@ -21,7 +21,7 @@ class App(models.Model):
     framework = models.CharField('Framework', max_length=16, choices=APP_FRAMEWORK)
     domain_name = models.CharField('Domain Name', max_length=50)
     screenshot = models.URLField('Screenshot', max_length=200, blank=True)
-    # subscription = models.ForeignKey(Subscription, null=True, on_delete=models.SET_NULL)
+    subscription = models.IntegerField('Subscription', null=True)
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField('Created at', null=True)
     updated_at = models.DateTimeField('Updated at', null=True)
@@ -30,15 +30,15 @@ class App(models.Model):
 class Plan(models.Model):
     name = models.CharField('Name', max_length=20)
     description = models.TextField('Description', blank=False)
-    price = models.DecimalField('Price', decimal_places=2, max_digits=5)
+    price = models.DecimalField('Price', decimal_places=2, max_digits=5, null=True)
     created_at = models.DateTimeField('Created at', null=True)
     updated_at = models.DateTimeField('Updated at', null=True)
 
 
 class Subscription(models.Model):
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.SET_NULL)
-    plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
-    app = models.ForeignKey(App, on_delete=models.CASCADE)
+    plan = models.IntegerField('Plan')
+    app = models.IntegerField('App')
     active = models.BooleanField('Active')
     created_at = models.DateTimeField('Created at', null=True)
     updated_at = models.DateTimeField('Updated at', null=True)
